@@ -1,0 +1,75 @@
+<mat-toolbar class="nav">
+  <div style="padding-top: .7rem; display: flex; flex-direction: row">
+<!--    <mat-icon class="bellStyle">notifications_none</mat-icon>-->
+    <mat-icon [matMenuTriggerFor]="notifications" class="bellStyle" matBadgePosition="below after" matBadge="5" matBadgeColor="warn">notifications</mat-icon>
+
+
+<!--    <p-avatar image="assets/navBar/me.jpg" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>-->
+    <div class="circle">
+      <span class="initials">{{fullName| twoFirstLetters}}</span>
+    </div>
+    <mat-icon [matMenuTriggerFor]="menu" class="arrowDown" (click)="openMenu()" >keyboard_arrow_down</mat-icon>
+
+  </div>
+</mat-toolbar>
+
+<mat-menu #menu="matMenu" class="myMenu" xPosition="before">
+
+  <mat-list>
+    <mat-list-item>
+      <div class="circleMenu" matListItemIcon>
+        <span class="initialsMenu">{{fullName| twoFirstLetters}}</span>
+      </div>
+      <div matListItemLine class="textBlack">{{fullName}}</div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+
+    <mat-list-item [routerLink]="['/profile']">
+      <mat-icon matListItemIcon class="textBlack">edit</mat-icon>
+      <div matListItemLine class="textBlack">Edit Profile</div>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-icon matListItemIcon class="textBlack">lock</mat-icon>
+      <div matListItemLine class="textBlack">Change</div>
+      <div matListItemLine class="textBlack" style="font-size: 16px">password</div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+
+    <mat-list-item>
+      <mat-icon matListItemIcon class="textBlack">person_add</mat-icon>
+      <div matListItemLine class="textBlack">Add User</div>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-icon matListItemIcon class="textBlack">people</mat-icon>
+      <div matListItemLine class="textBlack">Edit Users</div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+
+    <mat-list-item [routerLink]="['/login']">
+      <mat-icon matListItemIcon>exit_to_app</mat-icon>
+      <div matListItemLine class="textBlack">Log Out</div>
+    </mat-list-item>
+  </mat-list>
+
+</mat-menu>
+
+
+<mat-menu #notifications="matMenu" class="myMenu" xPosition="before">
+
+  <mat-list>
+    <div mat-subheader>Notifications</div>
+
+    <mat-divider></mat-divider>
+
+    <div *ngFor="let notif of notificationsReq">
+      <mat-list-item >
+        <div matListItemLine>{{notif.content}}</div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </div>
+
+
+
+  </mat-list>
+
+</mat-menu>

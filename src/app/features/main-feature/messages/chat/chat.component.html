@@ -1,0 +1,76 @@
+<div *ngIf="candidateRole" style="display: flex; flex-direction: column; align-items: center; margin: 2rem;">
+    <p-card style="width: 80vw;" *ngFor="let msg of candidateMessages" header="Message from {{msg.fromUser}}">
+        <p class="m-3">
+            {{msg.messageContent}}
+        </p>
+        <div style="display: flex; justify-content: flex-end;">
+            <p-button label="Reply"></p-button>
+        </div>
+
+    </p-card>
+</div>
+
+<br><br>
+  
+
+  <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport" *ngIf="!candidateRole">
+
+    <div style="display: flex; justify-content: center; flex-direction: column; margin-bottom: 100px;">
+
+      <div *ngFor="let can of candidates" class="candidateList" [style]="{'background-image': 'linear-gradient(to right, '+can?.status?.statusColor +' 1%, rgba(0,0,0,0) 1%)'}">
+        <div style="display: flex; flex-direction: row; justify-content: flex-start">
+          <mat-list style="margin-right: 5rem; ">
+            <mat-list-item style="width: 10rem; ">
+              <div style="display: flex; flex-direction: row; justify-content: space-between">
+                <div class="circle">
+                  <span class="initials">{{can.fullName| twoFirstLetters}}</span>
+                </div>
+                <div style="margin-left: 1rem; margin-top: 1.5rem">
+                  <div mat-line >{{can.firstname | titlecase}} {{can.lastname | titlecase}}</div>
+                  <div mat-line style="color: #4e5652">{{can.email}}</div>
+                </div>
+                <p style="color: #4e5652" class="marginItemsListePhone">{{can.phone}}</p>
+
+              </div>
+            </mat-list-item>
+          </mat-list>
+          <p class="marginItemsListe">{{can.post | titlecase}}</p>
+          <p class="marginItemsListe">{{can.phoneNumber}}</p>
+
+          <button mat-raised-button class="marginItemsListe" style="background-color: #EFEFEF; width: 8rem; height: 2rem; border-radius: 10px; font-weight: 20;" (click)="newMessagePopUp(can.candidateId); loadConversation(can.candidateId)">Send message</button>
+
+          
+
+        </div>
+      </div>
+
+    </div>
+  </cdk-virtual-scroll-viewport>
+
+  <p-dialog [modal]="true" header="Send Message" [(visible)]="messagesPopup" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+    <div style="display: flex; justify-content: center; flex-direction: column">
+      
+    </div>
+    <div>
+      
+        <form [formGroup]="messageForm">
+            <div style="display: flex; flex-direction: row; width: 100%;">
+              <div style="display: flex; flex-direction: column; width: 70%;">
+                <label htmlFor="feedback">Tap you message to the candidate.</label>
+                <input formControlName="messageContent" pInputText id="feedback" aria-describedby="feedBack-help" /><br>
+              </div>
+              <div class="buttons" style="width: 30%;">
+                <button (click)="send()" class="butSee" >Submit</button>
+              </div>
+            </div>
+            <hr>
+            <div *ngFor="let msg of conversation">
+                <p > {{msg.messageContent}}</p>
+            </div>
+          
+          </form>
+      
+    </div>
+  </p-dialog>
+
+

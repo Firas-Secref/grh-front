@@ -1,0 +1,158 @@
+
+<div class="tablacamp">
+  <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
+
+    <h2>Available Jobs</h2>
+    <p-table #dt [value]="posts" [rows]="10" [paginator]="true" [style]="{width: '70vw' } "
+             [rowHover]="true" dataKey="id"
+             [showCurrentPageReport]="true">
+  
+      <ng-template pTemplate="header">
+        <tr>
+  
+          <th>Job Title</th>
+          <th>Job Ref</th>
+          <th>Job Description</th>
+          <th>Job State</th>
+          <th>Actions</th>
+  
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-post>
+        <tr>
+  
+          <td>{{post.offerTitle}}</td>
+          <td>{{post.offerRef}}</td>
+          <td>{{post.offerDescription}}</td>
+
+          <td>
+            <div  [style.background-color]="color(post.statusName)" style="text-align: center; border-radius: 15px;"> {{post.statusName}}</div></td>
+          <td>
+            <div class="buttons">
+              <button  class="butSee" (click)="viewJobDetails(post.offerId)"> <mat-icon>visibility</mat-icon>
+              </button>
+              <button *ngIf="candidateRole"  class="butValidate" (click)="postForThisOffer(post.offerId)"> Postuler </button>
+            </div>
+          </td>
+  
+        </tr>
+      </ng-template>
+  
+    </p-table><br><br><br>
+    <h2 *ngIf="candidateRole" >My Candidacy</h2>
+    <p-table *ngIf="candidateRole" #dt [value]="myCandidacys" [rows]="10" [paginator]="true"  [style]="{width: '70vw' } "
+             [rowHover]="true" dataKey="id"
+             [showCurrentPageReport]="true">
+  
+      <ng-template pTemplate="header">
+        <tr>
+  
+          <th>Candidate Name</th>
+          <th>Job Title</th>
+          <th>Job referance</th>
+          <th>FeedBacks</th>
+          <th>Status</th>
+  
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-candidate>
+        <tr>
+  
+          <td>{{candidate.firstname}} {{candidate.lastname}}</td>
+          <td>{{candidate.offer.offerTitle}}</td>
+          <td>{{candidate.offer.offerRef}}</td>
+          <td>
+            <div class="buttons">
+              <button  class="butSee" (click)="viewMyFeedBacks(candidate.candidateId)"><mat-icon>visibility</mat-icon></button>
+            </div>
+          </td>
+
+          <td>
+            <div [style.background-color]="color(candidate.status.statusName)" style="text-align: center;  border-radius: 15px;"> {{candidate.status.statusName}}</div></td>
+
+        </tr>
+      </ng-template>
+  
+    </p-table>
+
+    <p-dialog [(visible)]="postDetailsDialog"  [style]="{width: '450px'}" header="Job Details" styleClass="p-fluid">
+      <ng-template pTemplate="content">
+  
+        <div class="field">
+       
+<br>
+          <div style="display: flex; flex-direction: row; ">
+            <span><b>Job Title: </b></span>
+            <p> {{postDetails?.offerTitle}}</p>
+          </div>
+<br>
+          <div style="display: flex; flex-direction: row;">
+            <span><b>Job Referance: </b></span>
+            <p>{{postDetails?.offerRef}}</p>
+          </div>
+          <br>
+          <div style="display: flex; flex-direction: row;">
+            <span><b>Publish Date: </b></span>
+            <p>{{postDetails?.publishDate | date}}</p>
+          </div><br>
+          <div style="display: flex; flex-direction: row;">
+            <span><b>Job Status: </b></span>
+            <p>{{postDetails?.statusName}}</p>
+          </div>
+ 
+        </div>
+
+      </ng-template>
+  
+    </p-dialog>
+
+    <p-dialog [(visible)]="postForTheJobDialog"  [style]="{width: '30rem'}" header="Upload you CV" >
+      <ng-template pTemplate="content">
+        <form action="">
+          <div style="display: flex; justify-content: center; align-items: center;">
+            <div class="image-upload">
+              <label for="file-input">
+                <img src="assets/candidate/Groupe 10902.png"/>
+              </label>
+            
+              <input id="file-input" type="file" (change)="onFileChange($event)"/>
+            </div>
+            <span style="margin-left: 3rem;">file name</span>
+          </div>
+        </form><br>
+        <button  class="butValidate" (click)="uploadCv()"> Postuler </button>
+      </ng-template>
+  
+    </p-dialog>
+
+  </cdk-virtual-scroll-viewport>
+
+  </div>
+  <p-dialog [(visible)]="feedbacksDialog" [modal]="true" [style]="{width: '450px'}" header="Your feedbacks" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+
+
+        <div style="display: flex; flex-direction: column; justify-content: space-around;">
+          <div style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
+            <span><b>HR Feedbacks</b></span>
+            <br>
+            <div *ngIf="rhFeedbacksForCandidate">
+              <p  *ngFor="let feedback of rhFeedbacksForCandidate"> {{feedback.feedBackText}}</p>
+            </div>
+            <p *ngIf="rhFeedbacksForCandidate == null">Empty</p>
+          </div>
+<br>
+          <div style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
+            <span><b>Technical Feedbacks</b></span>
+            <br>
+            <div *ngIf="rhFeedbacksForCandidate">
+              <p  *ngFor="let feedback of techFeedbacksForCandidate"> {{feedback.feedBackText}}</p>
+            </div>
+            <p *ngIf="!techFeedbacksForCandidate">Empty</p>
+          </div>
+        
+        </div>        
+
+    </ng-template>
+
+  </p-dialog>

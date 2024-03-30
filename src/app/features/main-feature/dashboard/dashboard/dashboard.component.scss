@@ -1,0 +1,62 @@
+.red {
+
+    background-color: #FF6047;
+    border-radius: 4px;
+  }
+  .yellow {
+    width:6rem;
+    background-color: #FBBF7A;
+    border-radius: 4px;
+  
+  }
+  .green {
+    background-color: #329502;
+    border-radius: 4px;
+  
+  }
+  .tablacamp{
+    width: 70vw;
+    margin:5rem
+  }
+  .butSee{
+    background-color: #507DBC;
+    color: white;
+    width: 50%;
+    height: 2.5rem;
+    border-radius:5px ;
+    border: none;
+  }
+  .butSee:hover{
+    cursor: pointer;
+  }
+  .image-upload>input {
+    display: none;
+  }
+  .example-viewport {
+    height: 80vh;
+    width: 100vw;
+  }
+  .butValidate{
+    background-color: #329502;
+    color: white;
+    width: 100%;
+    height: 2.5rem;
+    border-radius:5px ;
+    border: none;
+  }
+  .butValidate:hover{
+    cursor: pointer;
+  }
+  .butRefuse{
+    background-color: #FF6047;
+    color: white;
+    width: 100%;
+    height: 2.5rem;
+    border-radius:5px ;
+    border: none;
+  }
+  .buttons{
+    display: flex;
+    gap:5px;
+  }
+  

@@ -1,0 +1,11 @@
+<div  #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="statusMenu" class="statusDiv" [ngStyle]="{'background-color':post.statusColor}" style=" margin-left: .3em"></div>
+<mat-menu #statusMenu="matMenu">
+
+  <button mat-menu-item *ngFor="let status of statusOptions">
+    <div style="display: flex; flex-direction: row" (click)="updateStatus(post, status)">
+      <div class="menuItems" [ngStyle]="{'background-color':status.statusColor}"></div>
+      <span>{{status.statusName}}</span>
+    </div>
+  </button>
+
+</mat-menu>

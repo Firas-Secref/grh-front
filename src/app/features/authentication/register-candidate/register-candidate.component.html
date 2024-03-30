@@ -1,0 +1,110 @@
+<div routerLink="/login" class="register">Go back to login page</div>
+<div>
+<div>
+
+  <form [formGroup]="candidateForm">
+    <div style="display: flex; flex-direction:column; justify-content: center; align-items: center; height: 100vh ">
+
+      <div style="display: flex; flex-direction: column">
+        <label>FirstName</label>
+        <mat-form-field class="example-full-width" appearance="outline">
+          <input formControlName="firstname" matInput>
+        </mat-form-field>
+        <!-- <div *ngIf="loginForm.get('username')!.errors" style="margin-top: -1.5rem">
+          <small style="color: red; margin-top: -1.5rem" *ngIf="loginForm.get('username')!.hasError('required') && loginForm.get('username')!.touched ">Field username is required</small>
+        </div> -->
+      </div>
+      <div style="display: flex; flex-direction: column">
+        <label>Lastname</label>
+        <mat-form-field class="example-full-width" appearance="outline">
+          <input formControlName="lastname" matInput>
+        </mat-form-field>
+        <!-- <div *ngIf="loginForm.get('username')!.errors" style="margin-top: -1.5rem">
+          <small style="color: red; margin-top: -1.5rem" *ngIf="loginForm.get('username')!.hasError('required') && loginForm.get('username')!.touched ">Field username is required</small>
+        </div> -->
+      </div>
+      <div style="display: flex; flex-direction: column">
+        <label>Email</label>
+        <mat-form-field class="example-full-width" appearance="outline">
+          <input formControlName="email" matInput>
+        </mat-form-field>
+        <!-- <div *ngIf="loginForm.get('username')!.errors" style="margin-top: -1.5rem">
+          <small style="color: red; margin-top: -1.5rem" *ngIf="loginForm.get('username')!.hasError('required') && loginForm.get('username')!.touched ">Field username is required</small>
+        </div> -->
+      </div>
+      <div style="display: flex; flex-direction: column">
+        <label>Username</label>
+        <mat-form-field class="example-full-width" appearance="outline">
+          <input formControlName="username" matInput>
+        </mat-form-field>
+        <!-- <div *ngIf="loginForm.get('username')!.errors" style="margin-top: -1.5rem">
+          <small style="color: red; margin-top: -1.5rem" *ngIf="loginForm.get('username')!.hasError('required') && loginForm.get('username')!.touched ">Field username is required</small>
+        </div> -->
+      </div>
+      <div style="display: flex; flex-direction: column">
+        <label>Password</label>
+        <mat-form-field class="example-full-width" appearance="outline">
+          <input formControlName="password" matInput type="password">
+        </mat-form-field>
+        <!-- <small style="color: red; margin-top: -1.5rem" *ngIf="loginForm.get('password')!.invalid && loginForm.get('password')!.touched ">Field password must contain at least 6 characters</small> -->
+
+      </div>
+      <div style="display: flex; flex-direction: column">
+        <label>Phone number</label>
+        <mat-form-field class="example-full-width" appearance="outline">
+          <input formControlName="phone" matInput type="number">
+        </mat-form-field>
+        <!-- <div *ngIf="loginForm.get('username')!.errors" style="margin-top: -1.5rem">
+          <small style="color: red; margin-top: -1.5rem" *ngIf="loginForm.get('username')!.hasError('required') && loginForm.get('username')!.touched ">Field username is required</small>
+        </div> -->
+      </div>
+
+
+      <div style="display: flex; flex-direction: column">
+        <label style="margin-left: -1.3rem;">Skills</label>
+
+        <mat-chip-grid #chipList aria-label="Fruit selection" style="width: 20rem; ">
+          <mat-chip *ngFor="let skill of skills" (removed)="remove(skill)">
+            {{skill.name}}
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+          <input  placeholder="New Skills ..."
+                 [matChipInputFor]="chipList"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="addOnBlur"
+                 (matChipInputTokenEnd)="add($event)">
+        </mat-chip-grid>
+        <!-- <small style="color: red; margin-top: -1.5rem" *ngIf="loginForm.get('password')!.invalid && loginForm.get('password')!.touched ">Field password must contain at least 6 characters</small> -->
+
+      </div>
+
+<br>
+      <button class="btn blue" mat-raised-button (click)="submitCandidate()" >S'inscrire</button>
+
+    </div>
+
+  </form>
+</div>
+<img src="../../../../assets/loginPage/Groupe%2010743.png" style="position: absolute; top: -7rem; right: -23.8rem" >
+
+
+
+<p-toast position="center" key="failed"  [baseZIndex]="5000">
+  <ng-template pTemplate="message">
+    <div class="p-flex p-flex-column" style="flex: 1; display: flex; flex-direction: column">
+      <div class="p-text-center" style="text-align: center">
+        <i class="pi pi-times-circle" style="font-size: 3rem"></i>
+        <h3>Authentication failed !!</h3>
+        <h4>Verify your credentials.</h4>
+      </div>
+      <div class="p-grid p-fluid">
+        <div class="p-col-5">
+          <button  type="button" pButton label="OK" class="p-button-danger"></button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>
+</div>

@@ -1,0 +1,216 @@
+<br><br>
+  <div style="display: flex; justify-content: flex-start; flex-direction: row; margin-top: 2rem; margin-left: 2.6rem">
+    <button mat-raised-button class="addBtnColor" (click)="openFindCandidateDialog()" >+ Find new Candidates</button>
+  </div>
+
+  <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
+
+    <div style="display: flex; flex-direction: row; justify-content: flex-start; margin-left: 2.3rem">
+
+      <div class="filterBlock">
+        <div style="display: flex; flex-direction: row; justify-content: flex-start">
+          <div>
+      <span class="p-input-icon-left">
+    <i class="pi pi-search"></i>
+    <input type="text" pInputText placeholder="Search">
+  </span>
+          </div>
+          <div class="filterClass">
+            <p-dropdown [options]="foods" class="dropDownFilter" placeholder="Status" optionLabel="name" [showClear]="true"></p-dropdown>
+          </div>
+        </div>
+        <div style="padding-top: .5rem">
+          <mat-chip-grid #chipList aria-label="Fruit selection">
+            <mat-chip *ngFor="let fruit of fruits" (removed)="remove(fruit)">
+              {{fruit.name}}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+            <input placeholder="New competence ..."
+                   [matChipInputFor]="chipList"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   [matChipInputAddOnBlur]="addOnBlur"
+                   (matChipInputTokenEnd)="add($event)">
+          </mat-chip-grid>
+        </div>
+
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: row; justify-content: flex-end; width: 83vw">
+      <button mat-raised-button class="addBtnColor" style="margin-top: 1.2rem;">Export List</button>
+    </div>
+    <div style="display: flex; justify-content: center; flex-direction: column; margin-bottom: 100px">
+
+      <div *ngFor="let can of candidates" class="candidateList" [style]="{'background-image': 'linear-gradient(to right, '+can?.status?.statusColor +' 1%, rgba(0,0,0,0) 1%)'}">
+        <div style="display: flex; flex-direction: row; justify-content: flex-start">
+          <mat-list style="margin-right: 5rem; margin-top:-1rem">
+            <mat-list-item>
+              <div style="display: flex; flex-direction: row; justify-content: space-between">
+                <div class="circle">
+                  <span class="initials">{{can.fullName| twoFirstLetters}}</span>
+                </div>
+                <!--            <p-avatar matListItemIcon image="assets/navBar/me.jpg" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>-->
+                <div style="margin-left: 1rem;">
+                  <div matListItemLine >{{can.firstname | titlecase}} {{can.lastname | titlecase}}</div>
+                  <div matListItemLine style="color: #4e5652">{{can.email}}</div>
+                </div>
+                <p style="color: #4e5652" class="marginItemsListePhone">{{can.phone}}</p>
+
+              </div>
+            </mat-list-item>
+          </mat-list>
+          <p class="marginItemsListe">{{can.post | titlecase}}</p>
+          <p class="marginItemsListe">{{can.phoneNumber}}</p>
+          <p class="marginItemsListe">{{can.offer.offerTitle}}</p>
+
+          <button mat-raised-button class="marginItemsListe" style="background-color: #EFEFEF; width: 8rem; height: 2rem; border-radius: 10px; font-weight: 20;" (click)="displayFeedBacks(can)">FeedBack</button>
+          <button mat-raised-button class="marginItemsListe addBtnColor" style="width: 8rem; height: 2rem; border-radius: 10px; color: white">Analyse</button>
+          <!-- <button mat-raised-button class="marginItemsListe addBtnColor" style="width: 8rem; height: 2rem; border-radius: 10px; color: white" (click)="showDialog(); analyse(can.cvPath)">Analyse</button> -->
+
+          <div style="display: flex; align-items: center">
+            <img [matMenuTriggerFor]="menu" src="../../../../assets/candidate/Groupe%2010902.png" style="width: 1.8rem; position: absolute">
+          </div>
+
+          <app-candidate-status [candidate]=can class="noBorder"></app-candidate-status>
+<!--          <mat-form-field appearance="outline" class="noBorder ">-->
+<!--            <mat-select placeholder="Profile">-->
+<!--              <mat-option>-->
+<!--                <mat-icon matSuffix>-->
+<!--                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="13" viewBox="0 0 28 13">-->
+<!--                    <rect id="Rectangle_5578" data-name="Rectangle 5578" width="28" height="13" rx="6" fill="#a4e6aa"/>-->
+<!--                  </svg>-->
+<!--                </mat-icon>-->
+<!--                Accepted-->
+<!--              </mat-option>-->
+<!--              <mat-option>-->
+<!--                <mat-icon matSuffix>-->
+<!--                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="13" viewBox="0 0 28 13">-->
+<!--                    <rect id="Rectangle_5578" data-name="Rectangle 5578" width="28" height="13" rx="6" fill="#a4e6aa"/>-->
+<!--                  </svg>-->
+<!--                </mat-icon>-->
+<!--                Accepted-->
+<!--              </mat-option>-->
+<!--            </mat-select>-->
+<!--          </mat-form-field>-->
+
+        </div>
+      </div>
+
+    </div>
+  </cdk-virtual-scroll-viewport>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>remove_red_eye</mat-icon>
+      <span>Visualise</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>arrow_downward</mat-icon>
+      <span>Download</span>
+    </button>
+
+  </mat-menu>
+
+  <p-dialog [modal]="true" header="CV Analyse" [(visible)]="display" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+    <br>
+    <div style="display: flex; justify-content: space-between">
+      <mat-list>
+        <mat-list-item>
+          <div style="display: flex; flex-direction: row; justify-content: space-between">
+            <p-avatar matListItemIcon image="assets/navBar/me.jpg" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
+            <div style="margin-left: 3rem; margin-top: 1rem">
+              <div matListItemLine >Firas Secref</div>
+              <div matListItemLine style="color: #4e5652">Firas.Secref10@gmail.com</div>
+            </div>
+          </div>
+        </mat-list-item>
+      </mat-list>
+      <p-dropdown [options]="cities" optionLabel="name" optionValue="code"></p-dropdown>
+    </div>
+    <p-divider type="dashed"></p-divider>
+    <div class="card">
+      <p-timeline [value]="events1" align="alternate" styleClass="customized-timeline">
+        <ng-template pTemplate="marker" let-event>
+			<span class="custom-marker p-shadow-2" [style.backgroundColor]="event.color">
+                <i [ngClass]="event.icon"></i>
+            </span>
+        </ng-template>
+        <ng-template pTemplate="content" let-event>
+          <p-card [header]="event.status" [subheader]="event.date">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error
+              repudiandae numquam deserunt
+              quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate
+              neque quas!</p>
+            <button pButton label="Read more" class="p-button-text"></button>
+          </p-card>
+        </ng-template>
+      </p-timeline>
+    </div>
+  </p-dialog>
+
+  <p-dialog [modal]="true" header="Find new candidates" [(visible)]="findCandidate" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '90vw'}">
+    <br>
+    <span class="p-input-icon-left">
+      <i class="pi pi-search"></i>
+      <input type="text" [(ngModel)]="termToFind" pInputText placeholder="Search">
+    </span>
+    <br>
+    <div style="display: flex; flex-direction: column; justify-content: center;">
+      <div *ngFor="let can of newCandidates | filter:termToFind" style="display: flex; flex-direction: column;">
+        <div class="cardNewCandidate">
+          <p class="detailsNew">{{can.first_name}} {{can.last_name}}</p>
+          <p class="detailsNew">{{can.url_profile}}</p>
+          <p class="detailsNew">{{can.jobtitle}}</p>
+          <p class="detailsNew">{{can.skills.join()}}</p>
+
+        </div>
+      </div>
+    </div>
+  </p-dialog>
+
+  <p-dialog [modal]="true" header="FeedBacks for {{candidateNameFeedBack}}" [(visible)]="feedBacks" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+    <div style="display: flex; justify-content: center; flex-direction: column">
+      <div style="display: flex; justify-content: flex-end; flex-direction: row">
+        <img src="../../../../assets/candidate/feedBack.png" style="width: 4vw; display: flex; justify-content: center">
+      </div>
+    </div>
+    <div>
+      <p-fieldset legend="HR Feedbacks"[toggleable]="true" *ngIf="rhRole">
+        <form [formGroup]="feedRhBackForm">
+          <div style="display: flex; flex-direction: row; width: 100%;">
+            <div style="display: flex; flex-direction: column; width: 70%;">
+              <label htmlFor="feedback">Enter your HR feedback for this candidate.</label>
+              <input formControlName="feedBackText" pInputText id="feedback" aria-describedby="feedBack-help" /><br>
+            </div>
+            <div class="buttons" style="width: 30%;">
+              <button  class="butSee" (click)="submitRhFeedBack()">Submit</button>
+            </div>
+          </div>
+
+
+        </form>
+        <ul>
+          <li *ngFor="let feedback of rhFeedbacksForCandidate">{{feedback.feedBackText}}</li>
+        </ul>
+      </p-fieldset>
+      <br>
+      <p-fieldset legend="Technical Feedbacks"[toggleable]="true" *ngIf="managerRole || teamLeadRole">
+        <form [formGroup]="feedTechBackForm">
+          <div style="display: flex; flex-direction: row; width: 100%;">
+            <div style="display: flex; flex-direction: column; width: 70%;">
+              <label htmlFor="feedback">Enter your Technical feedback for this candidate.</label>
+              <input formControlName="feedBackText" pInputText id="feedback" aria-describedby="feedBack-help" /><br>
+            </div>
+            <div class="buttons" style="width: 30%;">
+              <button  class="butSee" (click)="submitTechFeedBack()">Submit</button>
+            </div>
+          </div>
+        </form>
+        <ul>
+          <li *ngFor="let feedback of techFeedbacksForCandidate">{{feedback.feedBackText}}</li>
+        </ul>
+      </p-fieldset>
+    </div>
+  </p-dialog>
+

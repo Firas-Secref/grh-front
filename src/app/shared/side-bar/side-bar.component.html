@@ -1,0 +1,33 @@
+<div class="cards" >
+
+  <div class="buttons">
+
+    <button class="btn" [routerLink]="['/home']" *ngIf="candidateRole">
+      <img src="assets/sideBar/Groupe%2010772.png"  style="width: 28px"><span>Dashboard</span>
+    </button>
+
+    <button class="btn" [routerLink]="['/requests']" routerLinkActive="active" *ngIf="rhRole || managerRole">
+      <img src="assets/sideBar/to_do.png" style="width: 28px; filter: grayscale(100%);" /><span>Requests</span>
+    </button>
+
+    <button class="btn" [routerLink]="['/candidates']" routerLinkActive="active" *ngIf="rhRole">
+      <img src="assets/sideBar/Groupe%2010768.png" style="width: 28px" /><span>Candidates</span>
+    </button>
+
+    <button class="btn" [routerLink]="['/posts']" routerLinkActive="active" *ngIf="rhRole || managerRole">
+      <img src="assets/sideBar/Groupe%2010769.png" style="width: 28px" /><span>Job Offers</span>
+    </button>
+    <button class="btn" [routerLink]="['/interviews']" routerLinkActive="active" *ngIf="rhRole || managerRole || teamLeadRole">
+      <img src="assets/sideBar/Groupe%2010782.png" style="width: 28px" /><span>Calendar</span>
+    </button>
+
+    <button class="btn" [routerLink]="['/manageUsers']" routerLinkActive="active" *ngIf="rhRole">
+      <img src="assets/sideBar/Groupe%2010780.png" style="width: 28px" /><span>Manage</span>
+    </button>
+
+    <button class="btn" [routerLink]="['/messages']" routerLinkActive="active">
+      <img src="assets/sideBar/to_do.png" style="width: 28px; filter: grayscale(100%);" /><span>Messages</span>
+    </button>
+
+  </div>
+</div>

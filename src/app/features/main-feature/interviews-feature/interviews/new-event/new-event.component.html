@@ -1,0 +1,38 @@
+<form [formGroup]="eventForm">
+  <div style="display: flex; justify-content: space-evenly; flex-direction: row; width: 45rem">
+    <div class="coll" >
+      <label>Start Date</label>
+      <input formControlName="startDate" style="width: 20rem" type="text" pInputText />
+      <small style="color: red" *ngIf="eventForm.get('startDate')!.hasError('required') && eventForm.get('startDate')!.touched ">Field Etart date hour is required</small>
+    </div>
+    <div class="coll" >
+      <label>End Date</label>
+      <input formControlName="endDate" style="width: 20rem" type="text" pInputText />
+      <small style="color: red" *ngIf="eventForm.get('endDate')!.hasError('required') && eventForm.get('endDate')!.touched ">Field End date hour is required</small>
+
+    </div>
+  </div>
+  <br>
+  <div style="display: flex; justify-content: center; flex-direction: row; width: 45rem">
+    <div class="coll" style="margin-right: 2rem">
+      <label>Event name</label>
+      <input formControlName="eventName" style="width: 20rem" type="text" pInputText />
+      <small style="color: red" *ngIf="eventForm.get('eventName')!.hasError('required') && eventForm.get('eventName')!.touched ">Field Event name hour is required</small>
+
+    </div>
+    <div class="coll">
+      <label>Interview Type</label>
+      <p-dropdown formControlName="eventType" [ngClass]="{'ng-invalid ng-dirty': (eventForm.get('eventType')!.invalid && eventForm.get('eventType')!.touched)}" [style]="{'width': '20rem'}" [options]="interviewType" placeholder="Choose the interview type"></p-dropdown>
+      <small style="color: red" *ngIf="eventForm.get('eventType')!.hasError('required') && eventForm.get('eventType')!.touched ">Field Event type hour is required</small>
+
+    </div>
+
+  </div>
+  <br><br>
+
+  <div style="display: flex; justify-content: flex-end" >
+    <p-button label="CONFIRM" icon="pi pi-check" iconPos="left" (click)="onSubmit()"></p-button>
+    <button pButton style="margin-left: 1.3rem" class="p-button-danger" label="CANCEL" icon="pi pi-times" iconPos="left"></button>
+  </div>
+
+</form>

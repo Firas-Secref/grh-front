@@ -1,0 +1,103 @@
+
+<div style="display: flex; justify-content: flex-start; flex-direction: row; margin-top: 5rem; margin-left: 2rem; margin-bottom: 3rem">
+  <span class="p-input-icon-left" style="margin-left: 1.5rem; margin-right: 1.5rem">
+    <i class="pi pi-search"></i>
+    <input type="text" pInputText placeholder="Search">
+  </span>
+  <button mat-raised-button class="addBtnColor" (click)="showModalDialog()">+ New Task</button>
+</div>
+
+<p-scrollPanel [style]="{ width: '100%', height: '50%' }">
+  <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; margin-bottom: 100px">
+
+    <div *ngFor="let req of requests" class="candidateList" [ngStyle]="{'background-image': 'linear-gradient(to right, '+req.statusColor+' 4.5%, rgba(0,0,0,0) 1%)'} ">
+
+      <div style="display: flex; flex-direction: row; justify-content: flex-start; width: 40vw">
+<!--        <div class="customShape" [ngStyle]="{'background-color':req.statusColor}" (click)="openStatusMenu(req)" #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="menu"><mat-icon style="color: white">keyboard_arrow_down</mat-icon></div>-->
+        <app-request-menu-status [request]="req"></app-request-menu-status>
+        <div style="margin-left: 2rem; margin-top: 1rem; width: 10rem">
+          <div style="display: flex; flex-direction: row; justify-content: flex-start; margin-bottom: .8rem">
+            <div *ngIf="req.urgent">
+              <img class="warningImg" src="../../../../assets/requests/warning.png">
+            </div>
+            <div style="display: flex; flex-direction: column; justify-content: center; width: 20rem">
+              <div [ngStyle]="{'marginLeft': req.urgent ? '1.3rem': '.001rem'}" >{{req.requestTitle | titlecase}}</div>
+              <div [ngStyle]="{'marginLeft': req.urgent ? '1.3rem': '.001rem'}"style=";width: 10rem ">From {{req.userFirstname | titlecase}} {{req.userLastname | titlecase}}</div>
+            </div>
+
+          </div>
+          <div style="color: #099851; font-weight: bolder; width: 20vw; padding-right: 1rem">{{req.postRequired}}</div>
+          <div style="color: #4e5652; width: 20vw; padding-right: 1rem">{{req.description}}</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</p-scrollPanel>
+
+<mat-menu #menu="matMenu">
+
+  <button mat-menu-item *ngFor="let state of statusOptions">
+    <div style="display: flex; flex-direction: row" (click)="getStatus(state)">
+      <div class="menuItems" [ngStyle]="{'background-color':state.statusColor}"></div>
+      <span>{{state.statusName}}</span>
+    </div>
+  </button>
+
+  <button mat-menu-item disabled>
+    <mat-icon>delete_outline</mat-icon>
+    <span>Delete</span>
+  </button>
+</mat-menu>
+
+<p-dialog header="New Task" [(visible)]="displayModal" [modal]="true" [style]="{width: '70vw', height: '65vh'}" [baseZIndex]="10000"
+          [draggable]="false" [resizable]="false">
+  <form [formGroup]="requestForm">
+    <div style="display: flex; flex-direction: row; justify-content: space-around">
+      <div style="display: flex; flex-direction: column; width: 40%">
+        <label class="labelMarge">Task name</label>
+        <input formControlName="requestTitle" type="text" pInputText>
+      </div>
+
+      <div style="display: flex; flex-direction: row">
+        <div style="display: flex; flex-direction: column">
+          <label class="labelMarge">Deadline</label>
+          <div style="display: flex; flex-direction: row; width: 50%">
+            <p-dropdown formControlName="deadLineDay" [style]="{marginRight: '.5rem'}" [options]="days"></p-dropdown>
+            <p-dropdown formControlName="deadLineMonth" [style]="{marginLeft: '.5rem', marginRight: '.5rem'}" [options]="months" optionLabel="name"></p-dropdown>
+            <p-dropdown formControlName="deadLineYear" [style]="{marginLeft: '.5rem', marginRight: '.5rem'}" [options]="years" ></p-dropdown>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div style="display: flex; flex-direction: row; justify-content: space-evenly">
+      <div style="display: flex; flex-direction: column; width: 22%">
+        <label class="labelMarge">Post required</label>
+        <input formControlName="postRequired" type="text" pInputText>
+      </div>
+      <div style="display: flex; flex-direction: column; width: 60%">
+        <label class="labelMarge">Description</label>
+        <textarea formControlName="description" pInputTextarea></textarea>
+      </div>
+
+    </div>
+    <br>
+    <div style="display: flex; flex-direction: row; justify-content: flex-start">
+      <div style="display: flex; flex-direction: column">
+        <img style="margin-left: 4rem" class="warningImg2" src="../../../../assets/requests/warning.png">
+      </div>
+      <div style="margin-top: 1rem; margin-left: 2rem">
+        <p-checkbox formControlName="isUrgent" [binary]="true" inputId="binary" [style]="{marginRight: '.7rem'}"></p-checkbox>
+        <label>Urgent</label>
+      </div>
+
+    </div>
+
+  </form>
+  <ng-template pTemplate="footer">
+    <button pButton icon="pi pi-times" (click)="displayModal=false" class="p-button-danger" label="Cancel"></button>
+    <button pButton icon="pi pi-check" (click)="submitNewTask()" label="Submit" ></button>
+  </ng-template>
+</p-dialog>

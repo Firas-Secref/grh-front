@@ -1,0 +1,203 @@
+{"candidate":[
+  {
+    "url_profile": "https://www.linkedin.com/in/johndoe",
+    "jobtitle": "Software Engineer",
+    "skills": [ "Angular", "Java", "jQuery", "Bootstrap"],
+    "email": "johndoe@example.com",
+    "first_name": "John",
+    "last_name": "Doe",
+    "age": 30,
+    "location": "New York, USA"
+  },
+  {
+    "url_profile": "https://www.linkedin.com/in/janedoe",
+    "jobtitle": "Frontend Developer",
+    "skills": ["React", "JavaScript", "HTML", "CSS", "jQuery", "Bootstrap"],
+    "email": "janedoe@example.com",
+    "first_name": "Jane",
+    "last_name": "Doe",
+    "age": 28,
+    "location": "London, UK"
+  },
+  {
+    "url_profile": "https://www.linkedin.com/in/marksmith",
+    "jobtitle": "Full Stack Developer",
+    "skills": [ "Angular","Spring Boot","JavaScript", "HTML", "CSS"],
+    "email": "marksmith@example.com",
+    "first_name": "Mark",
+    "last_name": "Smith",
+    "age": 35,
+    "location": "San Francisco, USA"
+  },
+  {
+    "url_profile": "https://www.linkedin.com/in/sarahjones",
+    "jobtitle": "UI/UX Designer",
+    "skills": ["Adobe XD", "Sketch", "Figma", "UI Design"],
+    "email": "sarahjones@example.com",
+    "first_name": "Sarah",
+    "last_name": "Jones",
+    "age": 32,
+    "location": "Berlin, Germany"
+  },
+  {
+    "url_profile": "https://www.linkedin.com/in/andrewbrown",
+    "jobtitle": "Backend Developer",
+    "skills": ["Spring Boot", "Python", "Django", "MySQL"],
+    "email": "andrewbrown@example.com",
+    "first_name": "Andrew",
+    "last_name": "Brown",
+    "age": 29,
+    "location": "Toronto, Canada"
+  },
+  {
+    "url_profile": "https://www.linkedin.com/in/lisawilliams",
+    "jobtitle": "Data Analyst",
+    "skills": ["SQL", "Python", "Pandas"],
+    "email": "lisawilliams@example.com",
+    "first_name": "Lisa",
+    "last_name": "Williams",
+    "age": 31,
+    "location": "Sydney, Australia"
+  },
+  {
+    "url_profile": "https://www.linkedin.com/in/michaeltaylor",
+    "jobtitle": "DevOps Engineer",
+    "skills": ["Docker", "Kubernetes", "AWS", "Jenkins"],
+    "email": "michaeltaylor@example.com",
+    "first_name": "Michael",
+    "last_name": "Taylor",
+    "age": 34,
+    "location": "Seattle, USA"
+  },
+  {
+    "url_profile": "https://www.linkedin.com/in/emilyrodriguez",
+    "jobtitle": "Product Manager",
+    "skills": ["Agile Methodology", "Project Management"],
+    "email": "emilyrodriguez@example.com",
+    "first_name": "Emily",
+    "last_name": "Rodriguez",
+    "age": 33,
+    "location": "Paris, France"
+  },
+  {
+    "url_profile": "https://www.linkedin.com/in/alexandermartin",
+    "jobtitle": "Software Engineer",
+    "skills": ["Java", "Spring Boot", "React", "Node.js"],
+    "email": "alexandermartin@example.com",
+    "first_name": "Alexander",
+    "last_name": "Martin",
+    "age": 27,
+    "location": "Singapore"
+  },
+  {
+    "url_profile": "https://www.linkedin.com/in/sophiathompson",
+    "jobtitle": "Frontend Developer",
+    "skills": ["HTML", "CSS", "React", "Vue.js"],
+    "email": "sophiathompson@example.com",
+    "first_name": "Sophia",
+    "last_name": "Thompson",
+    "age": 26,
+    "location": "Melbourne, Australia"
+  },
+  {
+    "url_profile": "https://www.linkedin.com/in/robertoconnor",
+    "jobtitle": "Full Stack Developer",
+    "skills": ["Python", "Django", "React", "MySQL", "AWS"],
+    "email": "robertoconnor@example.com",
+    "first_name": "Robert",
+    "last_name": "O'Connor",
+    "age": 30,
+    "location": "Dublin, Ireland"
+  },
+  {
+    "url_profile": "https://www.linkedin.com/in/monicalewis",
+    "jobtitle": "Data Scientist",
+    "skills": ["Python", "R", "Machine Learning", "Data Analysis"],
+    "email": "monicalewis@example.com",
+    "first_name": "Monica",
+    "last_name": "Lewis",
+    "age": 29,
+    "location": "New York, USA"
+  },
+  {
+    "url_profile": "https://www.linkedin.com/in/davidwright",
+    "jobtitle": "Software Engineer",
+    "skills": ["Spring Boot", "React", "AWS", "Docker"],
+    "email": "davidwright@example.com",
+    "first_name": "David",
+    "last_name": "Wright",
+    "age": 32,
+    "location": "London, UK"
+  },
+  {
+    "url_profile": "https://www.linkedin.com/in/samanthaadams",
+    "jobtitle": "UI/UX Designer",
+    "skills": ["Adobe Photoshop", "Adobe Illustrator", "Sketch"],
+    "email": "samanthaadams@example.com",
+    "first_name": "Samantha",
+    "last_name": "Adams",
+    "age": 28,
+    "location": "Los Angeles, USA"
+  },
+  {
+    "url_profile": "https://www.linkedin.com/in/michaelsullivan",
+    "jobtitle": "Backend Developer",
+    "skills": ["Python", "Django", "Spring Boot", "MySQL"],
+    "email": "michaelsullivan@example.com",
+    "first_name": "Michael",
+    "last_name": "Sullivan",
+    "age": 31,
+    "location": "Toronto, Canada"
+  },
+  {
+    "url_profile": "https://www.linkedin.com/in/amyharris",
+    "jobtitle": "Data Analyst",
+    "skills": [ "Python", "Pandas", "Tableau", "Power BI"],
+    "email": "amyharris@example.com",
+    "first_name": "Amy",
+    "last_name": "Harris",
+    "age": 27,
+    "location": "Austin, USA"
+  },
+  {
+    "url_profile": "https://www.linkedin.com/in/brandonwalker",
+    "jobtitle": "DevOps Engineer",
+    "skills": ["AWS", "Docker", "Kubernetes", "Shell Scripting"],
+    "email": "brandonwalker@example.com",
+    "first_name": "Brandon",
+    "last_name": "Walker",
+    "age": 33,
+    "location": "Seattle, USA"
+  },
+  {
+    "url_profile": "https://www.linkedin.com/in/rachelroberts",
+    "jobtitle": "Product Manager",
+    "skills": ["Agile Methodology", "Project Management"],
+    "email": "rachelroberts@example.com",
+    "first_name": "Rachel",
+    "last_name": "Roberts",
+    "age": 29,
+    "location": "San Francisco, USA"
+  },
+  {
+    "url_profile": "https://www.linkedin.com/in/matthewgreen",
+    "jobtitle": "Software Engineer",
+    "skills": ["Java","Python", "Node.js", "MongoDB"],
+    "email": "matthewgreen@example.com",
+    "first_name": "Matthew",
+    "last_name": "Green",
+    "age": 28,
+    "location": "Sydney, Australia"
+  },
+  {
+    "url_profile": "https://www.linkedin.com/in/sophiewilson",
+    "jobtitle": "Frontend Developer",
+    "skills": ["HTML", "JavaScript", "React", "Vue.js"],
+    "email": "sophiewilson@example.com",
+    "first_name": "Sophie",
+    "last_name": "Wilson",
+    "age": 26,
+    "location": "Berlin, Germany"
+  }
+]
+}

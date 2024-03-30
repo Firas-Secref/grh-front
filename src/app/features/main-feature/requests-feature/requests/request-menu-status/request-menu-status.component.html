@@ -1,0 +1,16 @@
+<div class="customShape" [ngStyle]="{'background-color':request.statusColor}" [matMenuTriggerFor]="menu"><mat-icon style="color: white">keyboard_arrow_down</mat-icon></div>
+
+<mat-menu #menu="matMenu">
+
+  <button mat-menu-item *ngFor="let state of statusOptions">
+    <div style="display: flex; flex-direction: row" (click)="updateRequestStatus(state, request)">
+      <div class="menuItems" [ngStyle]="{'background-color':state.statusColor}"></div>
+      <span>{{state.statusName}}</span>
+    </div>
+  </button>
+
+  <button mat-menu-item disabled>
+    <mat-icon>delete_outline</mat-icon>
+    <span>Delete</span>
+  </button>
+</mat-menu>

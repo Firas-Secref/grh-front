@@ -1,0 +1,132 @@
+<form [formGroup]="interviewForm">
+  <div style="display: flex; justify-content: space-evenly; flex-direction: row; width: 45rem">
+    <div class="coll">
+      <label>Interview Date</label>
+      <input formControlName="interviewDate" style="width: 20rem" type="text" pInputText [ngClass]="{'ng-invalid ng-dirty': (interviewForm.get('interviewDate')!.invalid && interviewForm.get('interviewDate')!.touched)}" />
+      <small style="color: red" *ngIf="interviewForm.get('interviewDate')!.hasError('required') && interviewForm.get('interviewDate')!.touched ">Field Interview hour is required</small>
+
+    </div>
+    <div class="coll">
+      <label>Interview Hour</label>
+      <input formControlName="interviewHour" style="width: 20rem" type="text" pInputText [ngClass]="{'ng-invalid ng-dirty': (interviewForm.get('interviewHour')!.invalid && interviewForm.get('interviewHour')!.touched)}" />
+      <small style="color: red" *ngIf="interviewForm.get('interviewHour')!.hasError('required') && interviewForm.get('interviewHour')!.touched ">Field Interview hour is required</small>
+    </div>
+  </div>
+  <br>
+  <div style="display: flex; justify-content: center; flex-direction: row; width: 45rem">
+    <div class="coll" style="margin-right: 1.7rem">
+      <label>Candidate name</label>
+      <p-dropdown [ngClass]="{'ng-invalid ng-dirty': (interviewForm.get('candidateName')!.invalid && interviewForm.get('candidateName')!.touched)}" formControlName="candidateName" [style]="{'width': '20rem'}" [options]="candidates" placeholder="Select a candidate" optionLabel="fullName"></p-dropdown>
+    </div>
+
+    <div class="coll">
+      <label>Candidate E-mail</label>
+      <input formControlName="candidateEmail" style="width: 20rem" type="text" pInputText />
+      <small style="color: red" *ngIf="interviewForm.get('candidateEmail')!.hasError('required') && interviewForm.get('candidateEmail')!.touched ">Field Email is required</small>
+      <small style="color: red" *ngIf="interviewForm.get('candidateEmail')!.hasError('email') && interviewForm.get('candidateEmail')!.touched ">Wrong email format</small>
+    </div>
+  </div>
+  <br>
+
+  <div style="display: flex; justify-content: space-evenly; flex-direction: row; width: 45rem">
+    <div class="coll" style="margin-right: .9rem">
+      <label>Offer</label>
+      <p-dropdown [ngClass]="{'ng-invalid ng-dirty': (interviewForm.get('interviewSubject')!.invalid && interviewForm.get('interviewSubject')!.touched)}" formControlName="interviewSubject" [style]="{'width': '20rem'}" [options]="allSubjects" placeholder="Select One offer" optionLabel="title"></p-dropdown>
+    </div>
+    <div class="coll">
+      <label>Interviewer name</label>
+      <p-dropdown [ngClass]="{'ng-invalid ng-dirty': (interviewForm.get('interviewerName')!.invalid && interviewForm.get('interviewerName')!.touched)}" formControlName="interviewerName" [style]="{'width': '20rem'}" [options]="allUsers" placeholder="Select a name" optionLabel="fullName"></p-dropdown>
+    </div>
+  </div>
+<br>
+<div style="display: flex; justify-content: space-evenly; flex-direction: row; width: 45rem">
+  <div class="coll">
+    <label>Lien meet</label>
+    <input formControlName="lienGoogleMeet" style="width: 20rem" type="text" pInputText [ngClass]="{'ng-invalid ng-dirty': (interviewForm.get('interviewHour')!.invalid && interviewForm.get('interviewHour')!.touched)}" />
+  </div>
+</div>
+  <br>
+  <div style="display: flex; justify-content: flex-end">
+    <p-button label="CONFIRM" icon="pi pi-check" iconPos="left" (click)="submit()" [disabled]="interviewForm.invalid"></p-button>
+    <button pButton style="margin-left: 1.3rem" class="p-button-danger" (click)="close()" label="CANCEL" icon="pi pi-times" iconPos="left"></button>
+  </div>
+
+</form>
+
+
+<!--<div class="card">-->
+<!--  <h5>Custom Headers</h5>-->
+<!--  <p-tabView styleClass="tabview-custom">-->
+<!--    <p-tabPanel>-->
+<!--      <ng-template pTemplate="header">-->
+<!--        <i class="pi pi-calendar"></i>-->
+<!--        <span>Header I</span>-->
+<!--      </ng-template>-->
+<!--      <form [formGroup]="interviewForm">-->
+<!--        <div style="display: flex; justify-content: space-evenly; flex-direction: row; width: 45rem">-->
+<!--          <div class="coll" >-->
+<!--            <label>Interview Date</label>-->
+<!--            <input formControlName="interviewDate" style="width: 20rem" type="text" pInputText />-->
+<!--          </div>-->
+<!--          <div class="coll">-->
+<!--            <label>Interview Type</label>-->
+<!--            <p-dropdown formControlName="interviewType" [style]="{'width': '20rem'}" [options]="InterviewType" optionLabel="type"></p-dropdown>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <br>-->
+<!--        <div style="display: flex; justify-content: center; flex-direction: row; width: 45rem">-->
+<!--          <div class="coll">-->
+<!--            <label>Candidate name</label>-->
+<!--            <p-dropdown formControlName="candidateName" [style]="{'width': '14rem'}" [options]="InterviewType" optionLabel="type"></p-dropdown>-->
+<!--          </div>-->
+<!--          <div class="coll">-->
+<!--            <label>Subject</label>-->
+<!--            <p-dropdown formControlName="interviewSubject" [style]="{'width': '14rem'}" [options]="InterviewType" optionLabel="type"></p-dropdown>-->
+<!--          </div>-->
+<!--          <div class="coll">-->
+<!--            <label>Interviewer name</label>-->
+<!--            <p-dropdown formControlName="interviewerName" [style]="{'width': '14rem'}" [options]="allUsers" optionLabel="fullName"></p-dropdown>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <br><br>-->
+<!--        <div style="display: flex; justify-content: flex-end">-->
+<!--          <p-button label="CONFIRM" icon="pi pi-check" iconPos="left"></p-button>-->
+<!--          <button pButton style="margin-left: 1.3rem" class="p-button-danger" label="CANCEL" icon="pi pi-times" iconPos="left"></button>-->
+<!--        </div>-->
+
+<!--      </form>-->
+
+<!--    </p-tabPanel>-->
+<!--    <p-tabPanel header="Header II">-->
+<!--      <ng-template pTemplate="header">-->
+<!--        <i class="pi pi-user"></i>-->
+<!--        <span>Header II</span>-->
+<!--      </ng-template>-->
+<!--      <p>-->
+<!--        Sed ut perspiciatis unde omnis iste natus error sit voluptatem-->
+<!--        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab-->
+<!--        illo inventore veritatis et quasi architecto beatae vitae dicta sunt-->
+<!--        explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut-->
+<!--        odit aut fugit, sed quia consequuntur magni dolores eos qui ratione-->
+<!--        voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non-->
+<!--        numquam eius modi.-->
+<!--      </p>-->
+<!--    </p-tabPanel>-->
+<!--    <p-tabPanel header="Header III">-->
+<!--      <ng-template pTemplate="header">-->
+<!--        <i class="pi pi-search"></i>-->
+<!--        <span>Header III</span>-->
+<!--        <i class="pi pi-cog"></i>-->
+<!--      </ng-template>-->
+<!--      <p>-->
+<!--        At vero eos et accusamus et iusto odio dignissimos ducimus qui-->
+<!--        blanditiis praesentium voluptatum deleniti atque corrupti quos dolores-->
+<!--        et quas molestias excepturi sint occaecati cupiditate non provident,-->
+<!--        similique sunt in culpa qui officia deserunt mollitia animi, id est-->
+<!--        laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita-->
+<!--        distinctio. Nam libero tempore, cum soluta nobis est eligendi optio-->
+<!--        cumque nihil impedit quo minus.-->
+<!--      </p>-->
+<!--    </p-tabPanel>-->
+<!--  </p-tabView>-->
+<!--</div>-->

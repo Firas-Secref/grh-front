@@ -1,0 +1,45 @@
+.fontSettings{
+  color: #575A5E;
+  font-family: Ebrima
+}
+button{
+  border-radius: 50px;
+  font-family: Ebrima;
+  color: white;
+  background-image: linear-gradient(
+      290deg,
+      hsl(197deg 93% 24%) 0%,
+      hsl(206deg 34% 48%) 55%,
+      hsl(213deg 43% 67%) 100%
+  );
+}
+
+
+@media (min-width: 992px) {
+  .btn{
+    height: 8vh;
+    width: 20vw;
+    font-size: 1.3rem;
+  }
+  h2{
+    font-size: 4.5vw;
+    font-weight: 500;
+  }
+  p{
+    font-size: 2vw;
+    line-height: 9vh;
+
+  }
+  .scale1{
+    transform: scale(0.9)
+  }
+  .scale2{
+    transform: scale(0.7)
+  }
+  .scale3{
+    transform: scale(0.8)
+  }
+  .scale4{
+    transform: scale(0.7)
+  }
+}

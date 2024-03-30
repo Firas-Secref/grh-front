@@ -1,0 +1,18 @@
+<div class="statusDiv" [ngStyle]="{'background-color':candidate.status.statusColor}" [matMenuTriggerFor]="menu">
+
+</div>
+
+<mat-menu #menu="matMenu">
+
+  <button mat-menu-item *ngFor="let state of statusOptions">
+    <div style="display: flex; flex-direction: row" (click)="updateStatus(candidate, state)">
+      <div class="menuItems" [ngStyle]="{'background-color':state.statusColor}"></div>
+      <span>{{state.statusName}}</span>
+    </div>
+  </button>
+
+  <button mat-menu-item disabled>
+    <mat-icon>delete_outline</mat-icon>
+    <span>Delete</span>
+  </button>
+</mat-menu>

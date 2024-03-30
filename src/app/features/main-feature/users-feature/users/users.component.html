@@ -1,0 +1,92 @@
+<br><br>
+<div style="display: flex; justify-content: flex-start; flex-direction: row; margin-top: 2rem">
+  <span class="p-input-icon-left" style="margin-left: 1.5rem; margin-right: 1.5rem">
+    <i class="pi pi-search"></i>
+    <input type="text" pInputText placeholder="Search">
+  </span>
+  <button mat-raised-button class="addBtnColor" (click)="showModalDialog()" >+ Add new user</button>
+</div>
+
+<cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport">
+
+<div style="display: flex; justify-content: flex-start; flex-direction: column; margin-bottom: 100px">
+
+  <div class="candidateList" *ngFor="let user of allUsers">
+    <div style="display: flex; flex-direction: row; justify-content: flex-start">
+      <mat-list style="margin-right: 5rem; ">
+        <mat-list-item style="width: 10rem; ">
+          <div style="display: flex; flex-direction: row; justify-content: space-between">
+            <div class="circle">
+              <span class="initials">{{user.fullName| twoFirstLetters}}</span>
+            </div>
+            <!--            <p-avatar mat-list-icon image="assets/navBar/me.jpg" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>-->
+            <div style="margin-left: 1rem; margin-top: 1.5rem">
+              <div mat-line >{{user?.firstname | titlecase}} {{user?.lastname | titlecase}}</div>
+              <div mat-line style="color: #4e5652">{{user.email}}</div>
+            </div>
+          </div>
+        </mat-list-item>
+      </mat-list>
+      <p class="marginItemsListe">{{user.country}}</p>
+      <p class="marginItemsListe">{{user.username}}</p>
+      <p class="marginItemsListe">{{user.creationDate | date}}</p>
+      <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger marginBtn" style="font-size: 12rem"></button>
+
+    </div>
+  </div>
+
+</div>
+</cdk-virtual-scroll-viewport>
+
+<p-dialog header="NEW USER" [(visible)]="newUserModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+          [draggable]="false" [resizable]="false">
+  <div><br>
+    <div>
+      <div style="display: flex; justify-content: space-around; flex-direction: row">
+        <p-selectButton [(ngModel)]="newRole" [options]="roleInfo" optionLabel="label" optionValue="value"></p-selectButton>
+      </div>
+    </div>
+    <form [formGroup]="newUserForm">
+      <div style="display: flex; flex-direction: column; color: #065878"><br>
+        <div style="display: flex; flex-direction: column; justify-content: space-between">
+
+          <div style="display: flex; flex-direction: column; justify-content: flex-start">
+            <label><b>Firstname</b></label><br>
+            <input formControlName="firstname" type="text" pInputText style="border-radius: 15px">
+          </div>
+          <br>
+          <div style="display: flex; flex-direction: column; justify-content: flex-start">
+            <label><b>Lastname</b></label><br>
+            <input formControlName="lastname" type="text" pInputText style="border-radius: 15px">
+          </div>
+          <br>
+          <div style="display: flex; flex-direction: column; justify-content: flex-start">
+            <label><b>Email</b></label><br>
+            <input formControlName="email" type="text" pInputText style="border-radius: 15px">
+          </div>
+          <br>
+          <div style="display: flex; flex-direction: column; justify-content: flex-start">
+            <label><b>Department</b></label><br>
+            <p-dropdown [options]="departmentOptions" formControlName="department" optionLabel="name"></p-dropdown>
+          </div>
+          <br>
+          <div style="display: flex; flex-direction: column; justify-content: flex-start">
+            <label><b>Username</b></label><br>
+            <input formControlName="username" type="text" pInputText style="border-radius: 15px">
+          </div>
+          <br>
+          <div style="display: flex; flex-direction: column; justify-content: flex-start">
+            <label><b>Password</b></label><br>
+            <input formControlName="password" type="password" pPassword style="border-radius: 15px">
+          </div>
+        </div>
+        <br>
+      </div>
+    </form>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button pButton pRipple type="button" (click)="newUserModal=false" icon="pi pi-times" label="Cancel" class="p-button-danger"></button>
+    <p-button icon="pi pi-check" (click)="submitForm()" label="Submit" class="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>

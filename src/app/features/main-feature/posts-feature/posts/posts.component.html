@@ -1,0 +1,164 @@
+<!--<div class="toggle">-->
+<!--  <mat-button-toggle-group name="fontStyle" aria-label="Font Style">-->
+<!--    <mat-button-toggle value="italic">All Offers </mat-button-toggle>-->
+<!--    <mat-button-toggle value="bold">Job Offer</mat-button-toggle>-->
+<!--    <mat-button-toggle value="italic">Internship Offer </mat-button-toggle>-->
+<!--  </mat-button-toggle-group>-->
+<!--</div>-->
+<br><br><br><br>
+<button mat-raised-button class="addBtnColor" (click)="showNewOfferModal()">+ New Offer</button>
+
+
+<div style="display: flex; flex-direction: row; justify-content: flex-start; margin-left: 2.3rem">
+
+  <div class="filterBlock">
+    <div style="display: flex; flex-direction: row; justify-content: flex-start">
+      <div>
+      <span class="p-input-icon-left">
+    <i class="pi pi-search"></i>
+    <input type="text" pInputText placeholder="Search" [(ngModel)]="termToFind">
+  </span>
+      </div>
+      <div class="filterClass">
+        <p-dropdown [(ngModel)]="selectedStatus" (onChange)="statusSelected()" [options]="statusOptions" class="dropDownFilter" placeholder="Status" optionLabel="statusName" [showClear]="true"></p-dropdown>
+      </div>
+    </div>
+    <div style="padding-top: .5rem">
+      <mat-chip-grid #chipList aria-label="Fruit selection">
+        <mat-chip *ngFor="let fruit of fruits" (removed)="remove(fruit)">
+          {{fruit.name}}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+        <input placeholder="New competence ..."
+               [matChipInputFor]="chipList"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               [matChipInputAddOnBlur]="addOnBlur"
+               (matChipInputTokenEnd)="add($event)">
+      </mat-chip-grid>
+    </div>
+
+  </div>
+</div>
+
+<p-scrollPanel [style]="{ width: '100%', height: '50%' }">
+  <div style="display: flex; justify-content: center; flex-wrap: wrap">
+    <div *ngFor="let post of posts | filter:termToFind" class="jobCard">
+    <div style="display: flex; justify-content: flex-end">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon style="color: #065878">more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item style="color: #065878">
+          <mat-icon style="color: #065878">delete</mat-icon>
+          <span style="color: #065878">Delete Post</span>
+        </button>
+        <button mat-menu-item style="color: #065878" >
+          <mat-icon style="color: #065878">edit</mat-icon>
+          <span>Edit Post</span>
+        </button>
+
+      </mat-menu>
+    </div>
+
+    <h3 style="text-align: center; color: #065878; font-weight: bold; margin: .3em">{{post.offerTitle}}</h3>
+    <p style="text-align: justify; padding-right: 2em; padding-left: 2em; font-size: 12px; line-height: 2em; color: #666666">{{post.offerDescription}}</p>
+    <div style="display: flex; flex-direction: row">
+      <h3 style="padding-left: 2em; padding-right: 5em; color: #B4B4B4">Date {{post.publishDate|date}}</h3>
+      <div style="display: flex; justify-content: center; align-items: center; flex-direction: column">
+        <p style="font-size: .8em">Status</p>
+        <app-post-menu-status [post] = post></app-post-menu-status>
+      </div>
+    </div>
+    <!-- <button mat-raised-button class="addBtnColor" (click)="showPostCandidatureModal(post.offerTitle)">Postuler</button> -->
+
+  </div>
+
+
+</div>
+</p-scrollPanel>
+
+<p-dialog [modal]="true" header="New Offer" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+  <form [formGroup]="offerForm">
+    <div style="display: flex; flex-direction: column; color: #065878"><br>
+      <div style="display: flex; justify-content: center">
+        <p-selectButton formControlName="offerCategory" [options]="categoryInfo" ></p-selectButton>
+      </div>
+      <br>
+      <div style="display: flex; flex-direction: row; justify-content: space-between">
+        <div style="display: flex; flex-direction: column; justify-content: flex-start">
+          <label><b>Job Title</b></label><br>
+          <input formControlName="offerTitle" type="text" pInputText style="border-radius: 15px">
+          <small style="color: red;" *ngIf="offerForm.get('offerTitle')!.hasError('required') && offerForm.get('offerTitle')!.touched ">Field Job title is required</small>
+        </div>
+        <div style="display: flex; flex-direction: column; justify-content: flex-start">
+          <label><b>Job Reference </b></label><br>
+          <input formControlName="offerRef" type="text" pInputText style="border-radius: 15px">
+          <small style="color: red;" *ngIf="offerForm.get('offerRef')!.hasError('required') && offerForm.get('offerRef')!.touched ">Field Reference is required</small>
+        </div>
+        <div style="display: flex; flex-direction: column; justify-content: flex-start">
+          <label><b>Publish Date</b></label><br>
+          <input formControlName="publishDate" type="text" pInputText style="border-radius: 15px">
+          <small style="color: red;" *ngIf="offerForm.get('publishDate')!.hasError('required') && offerForm.get('publishDate')!.touched ">Field Publish date is required</small>
+        </div>
+      </div>
+      <br>
+      <div style="display: flex; flex-direction: column; justify-content: flex-start">
+        <label><b>Description</b></label><br>
+        <textarea formControlName="offerDescription" rows="5" cols="30" pInputTextarea style="border-radius: 15px"></textarea>
+        <small style="color: red;" *ngIf="offerForm.get('offerDescription')!.hasError('required') && offerForm.get('offerDescription')!.touched ">Field Description is required</small>
+      </div>
+    </div>
+  </form>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple type="button" (click)="displayModal=false" icon="pi pi-times" label="Cancel" class="p-button-danger"></button>
+    <p-button icon="pi pi-check" (click)="addNewOffer()" label="Submit" class="p-button-text" ></p-button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog [modal]="true" header="Postuler" [(visible)]="postCandidature" [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+  <form [formGroup]="postOfferForm">
+    <div style="display: flex; flex-direction: column; color: #065878"><br>
+
+      <div style="display: flex; flex-direction: column; justify-content: space-between">
+        <div style="display: flex; flex-direction: column; justify-content: flex-start">
+          <label><b>Job Title</b></label><br>
+          <input readonly formControlName="jobTitle" type="text" pInputText style="border-radius: 15px"><br>
+          <!-- <small style="color: red;" *ngIf="offerForm.get('offerTitle')!.hasError('required') && offerForm.get('offerTitle')!.touched ">Field Job title is required</small> -->
+        </div>
+        <div style="display: flex; flex-direction: column; justify-content: flex-start">
+          <label><b>Firstname</b></label><br>
+          <input readonly formControlName="firstname" type="text" pInputText style="border-radius: 15px"><br>
+          <!-- <small style="color: red;" *ngIf="offerForm.get('offerTitle')!.hasError('required') && offerForm.get('offerTitle')!.touched ">Field Job title is required</small> -->
+        </div>
+        <div style="display: flex; flex-direction: column; justify-content: flex-start">
+          <label><b>Lastname </b></label><br>
+          <input readonly formControlName="lastname" type="text" pInputText style="border-radius: 15px"><br>
+          <!-- <small style="color: red;" *ngIf="offerForm.get('offerRef')!.hasError('required') && offerForm.get('offerRef')!.touched ">Field Reference is required</small> -->
+        </div>
+        <div style="display: flex; flex-direction: column; justify-content: flex-start">
+          <label><b>Email</b></label><br>
+          <input readonly formControlName="email" type="text" pInputText style="border-radius: 15px"><br>
+          <!-- <small style="color: red;" *ngIf="offerForm.get('publishDate')!.hasError('required') && offerForm.get('publishDate')!.touched ">Field Publish date is required</small> -->
+        </div>
+        <div style="display: flex; flex-direction: column; justify-content: flex-start">
+          <label><b>Upload CV</b></label><br>
+          <input type="text" pInputText style="border-radius: 15px"><br>
+          <!-- <small style="color: red;" *ngIf="offerForm.get('publishDate')!.hasError('required') && offerForm.get('publishDate')!.touched ">Field Publish date is required</small> -->
+        </div>
+      </div>
+      <br>
+      <div style="display: flex; flex-direction: column; justify-content: flex-start">
+        <label><b>Message</b></label><br>
+        <textarea formControlName="message" rows="5" cols="30" pInputTextarea style="border-radius: 15px"></textarea>
+        <!-- <small style="color: red;" *ngIf="offerForm.get('offerDescription')!.hasError('required') && offerForm.get('offerDescription')!.touched ">Field Description is required</small> -->
+      </div>
+    </div>
+  </form>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple type="button" (click)="displayModal=false" icon="pi pi-times" label="Cancel" class="p-button-danger"></button>
+    <p-button icon="pi pi-check" (click)="addNewOffer()" label="Submit" class="p-button-text" ></p-button>
+  </ng-template>
+</p-dialog>
+
